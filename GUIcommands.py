@@ -4,15 +4,16 @@ from pygame.locals import *
 from math import pi
 from AbstractClasses import *
 from Singletons import *
+from EventWatcher import *
+
 
 
 class CreateEventTable(Command):
 
     events = {}
 
-    def __init__(self, events):
-        self.events = events
-
+    def __init__(self):
+        self.events = EventWatcher().events
 
     def execute(self):
         # draw a table for showing the upcoming 10 events
@@ -32,23 +33,21 @@ class CreateEventTable(Command):
         # draw text
         rows = 0;
         if not self.events:
-            print('No upcoming events found.')
+            print('No upcoming events found for today.')
         for event in self.events:
             timestamp = str(event['start'].get('dateTime'))
-
             date = timestamp[:-15]
             i = datetime.now()
             currentdate = i.strftime('%Y-%m-%d')
-
             if date == currentdate:
                 time = timestamp[11:-9];
                 summary = event['summary']
-
                 timeRender = font.render(time, 1, WHITE)
                 summaryRender = font.render(summary, 1, WHITE)
                 Bag.screen.blit(timeRender, (0, 60 + (20 * rows)))
                 Bag.screen.blit(summaryRender, (50, 60 + (20 * rows)))
                 rows = rows + 1
+
 
 
 

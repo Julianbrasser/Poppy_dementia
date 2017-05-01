@@ -1,9 +1,7 @@
 #!/usr/bin/env python
 
-
 #draw1.py
 #A working examples of all the pygame.draw functions
-
 import os, sys, pygame
 from pygame.locals import *
 from math import pi
@@ -20,29 +18,12 @@ def deg(rad):
 
 size = width, height = 340, 410
 screen = pygame.display.set_mode(size)
-pygame.display.set_caption("pygame.draw functions ~ examples")
+pygame.display.set_caption("Upcoming 10 events")
 pygame.init()
 
 #draw a few rectangles
-rect1 = pygame.draw.rect(screen, WHITE, (20,20,60,60),0) #filled = 0
-rect2 = pygame.draw.rect(screen, WHITE, (100,20,60,60),3) # not filled
+table = pygame.draw.rect(screen, WHITE, (100,20,60,60),3) # not filled
 
-#draw a few polygons
-points = []
-points.append((20,100))
-points.append((80,100))
-points.append((80,160))
-poly1 = pygame.draw.polygon(screen, WHITE, points, 0) #filled
-points=[]
-points.append((100,100))
-points.append((160,100))
-points.append((160,160))
-points.append((100,160))
-poly2 = pygame.draw.polygon(screen, WHITE, points, 3) #not filled
-
-#draw a few circles
-circ1 = pygame.draw.circle(screen, WHITE, (50,180), 30, 0) #filled
-circ2 = pygame.draw.circle(screen, WHITE, (130,180), 30, 3) #filled
 
 #draw an ellipse
 ellipse1 = pygame.draw.ellipse(screen, WHITE, (20,220,140,60), 3)

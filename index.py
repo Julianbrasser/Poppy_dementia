@@ -6,9 +6,6 @@ my_robot = autodetect_robot()
 for m in my_robot.motors:
     m.goal_position = 0.0
 
-
-import json
-
 config = my_robot.to_config()
 
 with open('my_robot.json', 'wb') as f:
