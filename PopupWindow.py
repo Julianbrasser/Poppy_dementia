@@ -1,19 +1,21 @@
 from AbstractClasses import *
 from Singletons import *
 from Speaker import *
+from GUIcommands import *
 
 class PopupWindow(SwitchableWindow):
     backgroundColor = GREEN
-    event = {}
     speaker = {}
 
     def __init__(self, event):
-        self.event = event
-        self.speaker = Speaker()
+        eventStamp = StampPopup(event)
+        self.commands.append(eventStamp)
+        self.view()
+
 
     def view(self):
         ViewProxy().viewPopup(self)
-        
+
 
 
 

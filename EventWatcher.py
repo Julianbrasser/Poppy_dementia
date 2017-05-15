@@ -11,6 +11,7 @@ from oauth2client.file import Storage
 from Singletons import *
 from AbstractClasses import *
 from PopupWindow import *
+from Speaker import *
 
 # If modifying these scopes, delete your previously saved credentials
 # at ~/.credentials/calendar-python-quickstart.json
@@ -37,11 +38,13 @@ class RetrieveCommand(Command):
             self.receiver.retrieve()
             self.callsUntilHit = self.callsPerHit
 
-class EventWatcher(object):
+class EventWatcher:
     __metaclass__ = Singleton
 
     events = {}
     eventsToday = {}
+
+    firstEvent ={}
 
     def __init__(self):
         self.retrieve()
@@ -53,9 +56,6 @@ class EventWatcher(object):
             flags = argparse.ArgumentParser(parents=[tools.argparser]).parse_args()
         except ImportError:
             flags = None
-
-
-
 
             """Shows basic usage of the Google Calendar API.
 
@@ -75,16 +75,11 @@ class EventWatcher(object):
         self.events = eventsResult.get('items', [])
 
         #let popup appear when a new event is starting
-        firstEvent = self.events[0]
-        timestamp = str(firstEvent['start'].get('dateTime'))
+        self.firstEvent = self.events[0]
+        timestamp = str(self.firstEvent['start'].get('dateTime'))
 
-        date = timestamp[:-15]
-        i = datetime.now()
-        currentdate = i.strftime('%Y-%m-%d')
 
-        if date == currentdate:
-                popup = PopupWindow(firstEvent)
-                popup.view()
+
 
     def get_credentials(self):
         """Gets valid user credentials from storage.

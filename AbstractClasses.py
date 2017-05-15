@@ -17,7 +17,6 @@ DELAYTIME = 500
 #function to object. You may call it 'delegate-item'
 class Command:
 
-
     def execute(self):
         raise NotImplementedError
 
@@ -28,7 +27,9 @@ class SwitchableWindow:
     backgroundColor = BLACK
 
     def showMaximized(self):
-        pygame.draw.rect(Bag.screen, self.backgroundColor, (0, 0, SCREENSIZE[0], SCREENSIZE[1]), 0)  # Fills the whole containing screen
+
+        Bag().screen = pygame.display.get_surface()
+        Bag().screen.fill(self.backgroundColor)
 
         for c in self.commands:
             c.execute()

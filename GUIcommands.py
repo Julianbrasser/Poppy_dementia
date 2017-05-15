@@ -7,6 +7,25 @@ from Singletons import *
 from EventWatcher import *
 
 
+class StampPopup(Command):
+
+    event = object
+
+    def __init__(self, event):
+        self.event = event
+
+    def execute(self):
+
+        summary = self.event['summary']
+
+        # draw a table for showing the upcoming 10 events
+        # draw header-text
+        font = pygame.font.Font(None, 24)
+        fontimg1 = font.render(summary, 1, WHITE)
+
+        Bag().screen.fill(GREEN)
+        Bag().screen.blit(fontimg1, (10, 20))
+
 
 class CreateEventTable(Command):
 
@@ -21,14 +40,14 @@ class CreateEventTable(Command):
         font = pygame.font.Font(None, 24)
         fontimg1 = font.render("Tijd", 1, WHITE)
         fontimg2 = font.render("Wat te doen", 1, WHITE)
-        Bag.screen.blit(fontimg1, (10, 20))
-        Bag.screen.blit(fontimg2, (50, 20))
+        Bag().screen.blit(fontimg1, (10, 20))
+        Bag().screen.blit(fontimg2, (50, 20))
         # draw double line
-        pygame.draw.aaline(Bag.screen, WHITE, (20, 40), (300, 40))
-        pygame.draw.aaline(Bag.screen, WHITE, (20, 50), (300, 50))
+        pygame.draw.aaline(Bag().screen, WHITE, (20, 40), (300, 40))
+        pygame.draw.aaline(Bag().screen, WHITE, (20, 50), (300, 50))
 
         # draw vertical line
-        pygame.draw.aaline(Bag.screen, WHITE, (40, 50), (40, 500))
+        pygame.draw.aaline(Bag().screen, WHITE, (40, 50), (40, 500))
 
         # draw text
         rows = 0;
@@ -44,8 +63,8 @@ class CreateEventTable(Command):
                 summary = event['summary']
                 timeRender = font.render(time, 1, WHITE)
                 summaryRender = font.render(summary, 1, WHITE)
-                Bag.screen.blit(timeRender, (0, 60 + (20 * rows)))
-                Bag.screen.blit(summaryRender, (50, 60 + (20 * rows)))
+                Bag().screen.blit(timeRender, (0, 60 + (20 * rows)))
+                Bag().screen.blit(summaryRender, (50, 60 + (20 * rows)))
                 rows = rows + 1
 
 

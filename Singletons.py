@@ -23,15 +23,24 @@ class ViewProxy(object):
         self.popups.append(window)
 
     def viewNormal(self, window):
-        self.normalWindows.append(window)
-        if self.popups == []:
-            self.normalWindows.pop().showMaximized()
+        if len(self.popups) >= 1:
+            self.normalWindows.append(window)
+        else:
+            window.showMaximized()
+            self.normalWindows.append(window)
+
 
     def closeLast(self):
-        if self.popups == [] and self.normalWindows != []:
-            self.normalWindows.pop().showMaximized()
-        elif self.popups != []:
-            self.popups.pop().showMaximized()
+        if len(self.popups) == 1:
+            self.normalWindows[-1].showMaximized()
+            self.popups = []
+        elif len(self.popups) >= 2:
+            self.popups[-2].showMaximized()
+            self.popups.pop()
+        elif len(self.popups) == 0 and len(self.normalWindows) >= 1:
+            self.normalWindows[-2].showMaximized()
+            self.normalWindows.pop()
+
 
 
 

@@ -5,12 +5,15 @@ from math import pi
 from AbstractClasses import *
 from Singletons import *
 from GUIcommands import *
+from PopupWindow import *
 
 class PoppyWindow(SwitchableWindow):
     def __init__(self):
         eventTable = CreateEventTable()
         self.commands.append(eventTable)
         self.view()
+
+        popup = PopupWindow(EventWatcher().firstEvent)
 
 
         #checks for events with a delay
